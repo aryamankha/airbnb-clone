@@ -37,6 +37,7 @@ We'll be using React, Next, and Typescript for our frontend with Tailwind for al
 ## What is Vivid?
 
 Vivid is an in-browser styling we've developed (check out www.vivid.lol). It's still in alpha, but it allows you to style with Tailwind directly from your browser. Check out our [docs](https://docs.vivid.lol/functionality) to learn how it works! If you find any bugs in Vivid, feel free to create issues in this repository so we can address them. Would love your feedback!
+![Pitch Demo (1)](https://user-images.githubusercontent.com/62365335/195212305-0460ee70-4ab6-4b9f-89c6-d76e41adab7a.gif)
 
 
 ## Designs
