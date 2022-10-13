@@ -13,8 +13,8 @@ module.exports = {
       'Foggy':'#767676'
     },
     extend: {
-      fontFamily:{
-        montserrat: ['Montserrat'],
+      fontFamily: {
+        Montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
     },
   },
