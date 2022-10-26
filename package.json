@@ -3,19 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "date-fns": "^2.29.3",
     "next": "12.3.1",
     "react": "18.2.0",
+    "react-date-range": "^1.4.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.8.4",
     "@types/react": "18.0.21",
+    "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.12",
     "eslint": "8.25.0",
