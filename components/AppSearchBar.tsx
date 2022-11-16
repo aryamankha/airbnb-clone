@@ -1,27 +1,27 @@
-import React, { FC, FocusEvent, FormEvent, useContext, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { FC, FocusEvent, FormEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 // components
-import AppSearchOptionButton from './AppSearchOptionButton';
-import AppCounter from './AppCounter';
-import AppDateRange from './AppDateRange';
-import AppSearchOptionWrapper from './AppSearchOptionWrapper';
-import { useDataContext } from './../hooks/useDataContext';
-import { DATA_ACTION_TYPES } from './../context/actionTypes';
+import AppSearchOptionButton from "./AppSearchOptionButton";
+import AppCounter from "./AppCounter";
+import AppDateRange from "./AppDateRange";
+import AppSearchOptionWrapper from "./AppSearchOptionWrapper";
+import { useDataContext } from "./../hooks/useDataContext";
+import { DATA_ACTION_TYPES } from "./../context/actionTypes";
 // styles
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 // icons
-import { ChevronRightIcon } from '@heroicons/react/outline';
-import { HeaderOptions } from './interfaces/interfaces';
+import { ChevronRightIcon } from "@heroicons/react/outline";
+import { HeaderOptions } from "./interfaces/interfaces";
 // utils
-import { formatCheckDate, formatRangeDate, formatGuests } from './../utils';
+import { formatCheckDate, formatRangeDate, formatGuests } from "./../utils";
 // import { DataContext } from '../context/store';
 
 enum ESearchMenu {
-  LOCATION = 'location',
-  CHECK_IN = 'checkIn',
-  CHECK_OUT = 'checkOut',
-  GUESTS = 'guests',
+  LOCATION = "location",
+  CHECK_IN = "checkIn",
+  CHECK_OUT = "checkOut",
+  GUESTS = "guests",
 }
 
 interface IAppSearchBarProps {
@@ -40,7 +40,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
   const router = useRouter();
   const [searchMenu, setSearchMenu] = useState<ESearchMenu | null>(null);
   // data
-  const [{location, checkIn, checkOut,guests}, dispatch] = useDataContext();
+  const [{ location, checkIn, checkOut, guests }, dispatch] = useDataContext();
   // handler
   const handleOnBlur = (event?: FocusEvent<HTMLElement>) => {
     const { relatedTarget } = event || {};
@@ -48,9 +48,11 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
       setSearchMenu(null);
       return;
     }
-    const relatedTargetClassList = Array.from((relatedTarget as Element)?.classList);
+    const relatedTargetClassList = Array.from(
+      (relatedTarget as Element)?.classList
+    );
     const result = relatedTargetClassList.some((className) => {
-      const prefix = ['rdr', 'btn'];
+      const prefix = ["rdr", "btn"];
       if (prefix.includes(className.slice(0, 3))) return true;
     });
     if (!result) setSearchMenu(null);
@@ -59,6 +61,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
   const resetDate = () => {
     dispatch({
       type: DATA_ACTION_TYPES.RESET_DATES,
+      payload: undefined,
     });
     handleOnBlur();
   };
@@ -73,7 +76,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
     setSearchMenu(null);
 
     router.push({
-      pathname: '/search',
+      pathname: "/search",
       query: {
         location,
         checkIn: checkIn?.toISOString(),
@@ -84,22 +87,23 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
   };
 
   const dateRangeStyle =
-    'left-4 right-4 searchbar:left-auto searchbar:right-1/2 searchbar:translate-x-1/2 searchbar:w-[850px]';
+    "left-4 right-4 searchbar:left-auto searchbar:right-1/2 searchbar:translate-x-1/2 searchbar:w-[850px]";
 
   return (
     <>
-      <div className={`${isActiveHeader ? 'visible' : 'invisible'} px-4`}>
+      <div className={`${isActiveHeader ? "visible" : "invisible"} px-4`}>
         <div
           className={`${
-            !isActiveHeader && 'translate-y-[-75px] transform scale-50 opacity-0 z-[100]'
+            !isActiveHeader &&
+            "translate-y-[-75px] transform scale-50 opacity-0 z-[100]"
           } max-w-[850px] mx-auto mt-2 rounded-full bg-white border border-gray-200 duration-300 hidden md:flex`}
         >
           <form
             action="/search"
             className={`${
               menu === HeaderOptions.FIND_EXPERIENCES
-                ? 'grid-cols-2'
-                : 'grid-cols-[0.8fr,0.7fr,0.7fr,auto] lg:grid-cols-[1fr,0.7fr,0.7fr,auto]'
+                ? "grid-cols-2"
+                : "grid-cols-[0.8fr,0.7fr,0.7fr,auto] lg:grid-cols-[1fr,0.7fr,0.7fr,auto]"
             } grid flex-grow`}
             onSubmit={handleOnSubmit}
           >
@@ -113,20 +117,25 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
               active={searchMenu === ESearchMenu.LOCATION}
               value={location}
               onChange={({ target }) =>
-                dispatch({ type: DATA_ACTION_TYPES.SET_LOCATION, payload: target.value })
+                dispatch({
+                  type: DATA_ACTION_TYPES.SET_LOCATION,
+                  payload: target.value,
+                })
               }
               onFocus={() => setSearchMenu(ESearchMenu.LOCATION)}
               onBlur={handleOnBlur}
               onClear={() => {
-                dispatch({ type: DATA_ACTION_TYPES.SET_LOCATION, payload: '' });
+                dispatch({ type: DATA_ACTION_TYPES.SET_LOCATION, payload: "" });
                 handleOnBlur();
               }}
             >
               <AppSearchOptionWrapper className="left-0">
                 <div className="py-4">
-                  <h2 className="mb-4 text-xs font-bold">GO ANYWHERE, ANYTIME</h2>
+                  <h2 className="mb-4 text-xs font-bold">
+                    GO ANYWHERE, ANYTIME
+                  </h2>
                   <button className="flex justify-between w-[436px] px-6 py-4 border border-gray-200 rounded-full shadow-md text-primary">
-                    <span className="font-bold">I&apos;m flexible</span>{' '}
+                    <span className="font-bold">I&apos;m flexible</span>{" "}
                     <ChevronRightIcon className="h-6" />
                   </button>
                 </div>
@@ -197,10 +206,14 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                           value={guests.adults}
                           maxValue={16}
                           onIncrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.INCREASE_ADULTS })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.INCREASE_ADULTS,
+                            })
                           }
                           onDescrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.DECREASE_ADULTS })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.DECREASE_ADULTS,
+                            })
                           }
                         />
                       </div>
@@ -209,16 +222,22 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                       <div className="flex py-4 border-b border-gray-200 border-opacity-70">
                         <div className="flex-grow">
                           <h2 className="font-medium">Children</h2>
-                          <p className="text-sm leading-4 text-gray-300">Ages 2-12</p>
+                          <p className="text-sm leading-4 text-gray-300">
+                            Ages 2-12
+                          </p>
                         </div>
                         <AppCounter
                           value={guests.children}
                           maxValue={5}
                           onIncrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.INCREASE_CHILDREN })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.INCREASE_CHILDREN,
+                            })
                           }
                           onDescrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.DECREASE_CHILDREN })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.DECREASE_CHILDREN,
+                            })
                           }
                         />
                       </div>
@@ -227,16 +246,22 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                       <div className="flex py-4">
                         <div className="flex-grow">
                           <h2 className="font-medium">Infants</h2>
-                          <p className="text-sm leading-4 text-gray-300">Under 2</p>
+                          <p className="text-sm leading-4 text-gray-300">
+                            Under 2
+                          </p>
                         </div>
                         <AppCounter
                           value={guests.infants}
                           maxValue={5}
                           onIncrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.INCREASE_INFANTS })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.INCREASE_INFANTS,
+                            })
                           }
                           onDescrease={() =>
-                            dispatch({ type: DATA_ACTION_TYPES.DECREASE_INFANTS })
+                            dispatch({
+                              type: DATA_ACTION_TYPES.DECREASE_INFANTS,
+                            })
                           }
                         />
                       </div>

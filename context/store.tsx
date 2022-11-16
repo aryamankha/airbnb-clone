@@ -1,6 +1,6 @@
-import { createContext, useReducer,type Dispatch } from 'react';
-import { dataReducer } from './reducer';
-
+import React, { createContext, useReducer, type Dispatch } from "react";
+import { dataReducer } from "./reducer";
+import { IDataAction } from "./actionTypes";
 
 interface IInitialState {
   location: string;
@@ -13,32 +13,58 @@ interface IInitialState {
   };
 }
 
-export const initialState: IInitialState = {
-  location: '',
+/**
+ * TODO add documentation all types
+ * with tsdoc!
+ */
+export interface IDataContext {
+  location: string;
+  checkIn: Date | null;
+  checkOut: Date | null;
+  guests: {
+    adults: number;
+    children: number;
+    infants: number;
+  };
+}
+
+export const initialState: IDataContext = {
+  location: "",
   checkIn: null,
   checkOut: null,
   guests: { adults: 0, children: 0, infants: 0 },
-  // Use a type assertion on the line below, like this:
-  // dispatch: (() => undefined) as Dispatch<any>,
 };
 
 // export const DataContext = createContext<IInitialState>(initialState);
-export const DataContext = createContext<any>(initialState);
-interface IIProps{
-  children:React.ReactNode ,
-}
-export const ContextProvider = ({children}:any ) => {
-  const [state,dispatch] = useReducer(dataReducer,initialState);
+export const DataContext = createContext<[IDataContext, Dispatch<IDataAction>]>(
+  [
+    initialState,
+    () => {
+      return initialState;
+    },
+  ]
+);
+
+export type Props = {
+  children: React.ReactNode;
+};
+
+export const ContextProvider = ({ children }: Props) => {
+  const [state, dispatch] = useReducer(dataReducer, initialState);
+
   return (
-    <>
-  <DataContext.Provider value={
-    {
-      location:state.location,
-      checkIn:state.checkIn,
-      checkOut:state.checkOut,
-      guests:state.guests
-    }
-  }>
-    {children}
-  </DataContext.Provider></>);
+    <DataContext.Provider
+      value={[
+        {
+          location: state.location,
+          checkIn: state.checkIn,
+          checkOut: state.checkOut,
+          guests: state.guests,
+        },
+        dispatch,
+      ]}
+    >
+      {children}
+    </DataContext.Provider>
+  );
 };

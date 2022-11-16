@@ -1,7 +1,7 @@
-import { DATA_ACTION_TYPES } from './actionTypes';
-import { initialState } from './store';
+import { DATA_ACTION_TYPES, IDataAction } from "./actionTypes";
+import { IDataContext, initialState } from "./store";
 
-export const dataReducer = (state:any, action:any) => {
+export const dataReducer = (state: IDataContext, action: IDataAction) => {
   const { type, payload } = action;
   const { adults, children, infants } = state.guests;
   switch (type) {
@@ -32,7 +32,11 @@ export const dataReducer = (state:any, action:any) => {
       if (adults <= 0) {
         return {
           ...state,
-          guests: { ...state.guests, children: children + 1, adults: adults + 1 },
+          guests: {
+            ...state.guests,
+            children: children + 1,
+            adults: adults + 1,
+          },
         };
       }
       return { ...state, guests: { ...state.guests, children: children + 1 } };
