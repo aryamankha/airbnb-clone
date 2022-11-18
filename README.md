@@ -1,6 +1,6 @@
 # Airbnb Clone
 
-Building an Airbnb clone with Vivid - the in-browser styling editor that makes Tailwind CSS even faster. 
+Building an Airbnb clone with Vivid - the in-browser styling editor that makes Tailwind CSS even faster.
 
 <h1>
   <p align="center" ><b>
@@ -24,11 +24,11 @@ yarn
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Go over the Vivid docs at [docs.vivid.lol/functionality](https://docs.vivid.lol/functionality) to get familiar with how in-browser styling works.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Go over the Vivid docs at [docs.vivid.lol/functionality](https://docs.vivid.lol/) to get familiar with how in-browser styling works.
 
 ## Contributing
 
-This repository is beginner friendly! We'll be creating issues for contributors to own components in the frontend, but feel free to propose your own issues! The goal is to make our frontend replicate the [Airbnb site] (https://www.airbnb.com) as closely as possible. We might not actually be building out a backend for this project, but be sure to structure your frontend code in a way that could later be wired to a database. For example, if creating a component to represent an individual listing, don't hardcode every single text field - those should be passed in through props. 
+This repository is beginner friendly! We'll be creating issues for contributors to own components in the frontend, but feel free to propose your own issues! The goal is to make our frontend replicate the [Airbnb site] (https://www.airbnb.com) as closely as possible. We might not actually be building out a backend for this project, but be sure to structure your frontend code in a way that could later be wired to a database. For example, if creating a component to represent an individual listing, don't hardcode every single text field - those should be passed in through props.
 
 ## Code organization
 
