@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  airbnb-clone:
+    container_name: airbnb-clone
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - "${PWD}/:/app"
+    ports:
+      - "${AIRBNB_CLONE_PORT}:3005"

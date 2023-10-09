@@ -12,6 +12,23 @@ Building an Airbnb clone with Vivid - the in-browser styling editor that makes T
 
 ## Getting Started
 
+### Docker local development
+
+Clone the repository, export the desired port for the app to serve on, run the docker compose.
+
+```bash
+
+git clone https://github.com/aryamankha/airbnb-clone.git
+
+cd airbnb-clone
+
+export AIRBNB_CLONE_PORT=8080
+
+docker-compose -f docker-compose.yml up -d
+
+``` 
+
+###  Normal installation
 Clone the repository, install the necessary dependencies, and then run the application.
 
 ```bash
