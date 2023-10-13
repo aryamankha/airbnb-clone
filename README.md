@@ -26,7 +26,7 @@ yarn
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Go over the Vivid docs at [docs.vivid.lol](https://docs.vivid.lol) to get familiar with how in-browser styling works.
+Open [http://localhost:3005](http://localhost:3005) with your browser to see the result. Go over the Vivid docs at [docs.vivid.lol](https://docs.vivid.lol) to get familiar with how in-browser styling works.
 
 ## Contributing
 
