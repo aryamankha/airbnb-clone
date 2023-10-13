@@ -16,10 +16,12 @@ Clone the repository, install the necessary dependencies, and then run the appli
 
 ```bash
 git clone https://github.com/aryamankha/airbnb-clone.git
+cd airbnb-clone
 npm install
 npm run dev
 # or
 git clone https://github.com/aryamankha/airbnb-clone.git
+cd airbnb-clone
 yarn
 yarn dev
 ```
