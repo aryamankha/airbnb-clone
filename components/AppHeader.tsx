@@ -8,6 +8,7 @@ import { formatRangeDate } from '../utils/datesutils';
 import AppHeaderOption from './AppHeaderOption';
 import AppSearchBar from './AppSearchBar';
 import {GlobeAltIcon,MenuIcon,SearchIcon,UserCircleIcon} from '@heroicons/react/outline';
+import {Pricing} from "./Pricing";
 const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
   const [isSnapTop, setIsSnapTop] = useState<boolean>(searchPage ? false : true);
   const [isActiveSearch, setIsActiveSearch] = useState<boolean>(
@@ -168,6 +169,9 @@ const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
           onClick={() => setIsActiveSearch(false)}
         />
       )}
+      <div className="divtest">
+          <Pricing></Pricing>
+      </div>
   </>);
 };
 export default AppHeader;

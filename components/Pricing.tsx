@@ -9,6 +9,10 @@ export const Pricing = ({ override }: { override?: React.CSSProperties }) => {
     const nightsAmount = 5;
     const totalPrice = nightPrice * nightsAmount;
 
+    function onReserve(){
+        console.log("Reserve button works!");
+    }
+
   return (
     <div
       className="overflow-hidden flex flex-col items-start gap-2.5 w-full pt-5 px-5 rounded-[15px] h-[475px] bg-white font-[Quicksand]"
@@ -63,7 +67,7 @@ export const Pricing = ({ override }: { override?: React.CSSProperties }) => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2.5 rounded flex-1 min-h-0 self-stretch">
-        <button className="cursor-pointer flex justify-center items-center px-[50px] py-5 rounded-[7px] opacity-90 w-full h-12 bg-[rgb(218,_12,_101)] hover:bg-[]">
+        <button onClick={onReserve} className="cursor-pointer flex justify-center items-center px-[50px] py-5 rounded-[7px] opacity-90 w-full h-12 bg-[rgb(218,_12,_101)] hover:bg-[]">
           <p className="text-white text-xl font-semibold tracking-[-0.03em]">
             Reserve
           </p>
