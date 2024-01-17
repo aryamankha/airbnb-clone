@@ -5,7 +5,7 @@ interface AppSearchOptionsProps extends PropsWithChildren<any>{
 }
 const AppSearchOptionWrapper : FC<AppSearchOptionsProps> =({className,children})=>{
     return (
-        <div className={`${className} absolute px-8 py-4 mt-3 bg-white rounded-3xl shadow-arround-bold`} >
+        <div className={`${className} absolute px-8 py-4 mt-3 bg-white rounded-3xl shadow-around-bold`} >
             {children}
         </div>
     );

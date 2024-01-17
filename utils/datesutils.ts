@@ -1,10 +1,10 @@
 import { format } from "date-fns";
-export const formatCheckDate=(date:Date,dateFormat?:string)=>{
+export const formatCheckDate=(date:Date | null ,dateFormat?:string)=>{
     if(!date){return '';}
     return format(date,dateFormat || 'MMM d' );
 };
 
-export const formatRangeDate = (startDate :Date,endDate :Date)=>{
+export const formatRangeDate = (startDate :Date | null,endDate :Date | null)=>{
     if(!startDate || !endDate){return false;}
     let template = `${formatCheckDate(startDate)} - ${formatCheckDate(endDate)}`;
     if(formatCheckDate(startDate,'d m y') === formatCheckDate(endDate,'d m y') ){

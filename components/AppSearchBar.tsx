@@ -87,7 +87,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
   };
 
   const dateRangeStyle =
-    "left-4 right-4 searchbar:left-auto searchbar:right-1/2 searchbar:translate-x-1/2 searchbar:w-[850px]";
+    "mx-auto relative";
 
   return (
     <>
@@ -99,6 +99,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
           } max-w-[850px] mx-auto mt-2 rounded-full bg-white border border-gray-200 duration-300 hidden md:flex`}
         >
           <form
+            id="searchForm"
             action="/search"
             className={`${
               menu === HeaderOptions.FIND_EXPERIENCES
@@ -156,9 +157,9 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                   onClear={resetDate}
                 >
                   {/* date picker */}
-                  <AppSearchOptionWrapper className={dateRangeStyle}>
+                  {/* <AppSearchOptionWrapper className={dateRangeStyle}>
                     {searchMenu === ESearchMenu.CHECK_IN && <AppDateRange />}
-                  </AppSearchOptionWrapper>
+                  </AppSearchOptionWrapper> */}
                 </AppSearchOptionButton>
                 {/* check out */}
                 <AppSearchOptionButton
@@ -172,9 +173,9 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                   onClear={resetDate}
                 >
                   {/* date picker */}
-                  <AppSearchOptionWrapper className={dateRangeStyle}>
+                  {/* <AppSearchOptionWrapper className={dateRangeStyle}>
                     {searchMenu === ESearchMenu.CHECK_OUT && <AppDateRange />}
-                  </AppSearchOptionWrapper>
+                  </AppSearchOptionWrapper> */}
                 </AppSearchOptionButton>
                 {/* guests */}
                 <AppSearchOptionButton
@@ -187,7 +188,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                   onFocus={() => setSearchMenu(ESearchMenu.GUESTS)}
                   onBlur={handleOnBlur}
                   onClear={() => {
-                    dispatch({ type: DATA_ACTION_TYPES.RESET_GUESTS });
+                    dispatch({ type: DATA_ACTION_TYPES.RESET_GUESTS, payload: '' });
                     handleOnBlur();
                   }}
                   isSearch={!!searchMenu}
@@ -208,11 +209,13 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                           onIncrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.INCREASE_ADULTS,
+                              payload: 1
                             })
                           }
                           onDescrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.DECREASE_ADULTS,
+                              payload: 1
                             })
                           }
                         />
@@ -232,11 +235,13 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                           onIncrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.INCREASE_CHILDREN,
+                              payload: 1
                             })
                           }
                           onDescrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.DECREASE_CHILDREN,
+                              payload: 1
                             })
                           }
                         />
@@ -256,11 +261,13 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                           onIncrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.INCREASE_INFANTS,
+                              payload: 1
                             })
                           }
                           onDescrease={() =>
                             dispatch({
                               type: DATA_ACTION_TYPES.DECREASE_INFANTS,
+                              payload: 1
                             })
                           }
                         />
@@ -268,6 +275,9 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                     </div>
                   </AppSearchOptionWrapper>
                 </AppSearchOptionButton>
+                <AppSearchOptionWrapper className={dateRangeStyle}>
+                    {(searchMenu === ESearchMenu.CHECK_IN || searchMenu === ESearchMenu.CHECK_OUT) && <AppDateRange />}
+                 </AppSearchOptionWrapper>
               </>
             ) : (
               <AppSearchOptionButton

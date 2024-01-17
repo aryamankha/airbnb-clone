@@ -1,4 +1,4 @@
-import React,{useState,useEffect,FC} from 'react';
+import React,{FC} from 'react';
 import { LogoProps,EAppLogo } from './interfaces/interfaces';
 
 const defaultProps:LogoProps={

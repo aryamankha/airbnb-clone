@@ -1,17 +1,18 @@
-import React, { createContext, useReducer, type Dispatch } from "react";
+import React, { useState, createContext, useReducer, type Dispatch } from "react";
 import { dataReducer } from "./reducer";
 import { IDataAction } from "./actionTypes";
 
-interface IInitialState {
-  location: string;
-  checkIn: Date | null;
-  checkOut: Date | null;
-  guests: {
-    adults: number;
-    children: number;
-    infants: number;
-  };
-}
+// Below is not being used...
+// interface IInitialState {
+//   location: string;
+//   checkIn: Date | null;
+//   checkOut: Date | null;
+//   guests: {
+//     adults: number;
+//     children: number;
+//     infants: number;
+//   };
+// }
 
 /**
  * TODO add documentation all types
