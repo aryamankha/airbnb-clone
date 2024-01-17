@@ -1,38 +1,51 @@
-import {FC} from 'react'
+import {FC, FocusEvent} from 'react'
 import {DateRange} from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+
 // context
 import { DATA_ACTION_TYPES } from './../context/actionTypes';
 import { useDataContext } from './../hooks/useDataContext';
 
 interface AppDateRangeProps{
     months?:number,
+    onFocus: () => void;
+    onBlur: (event: FocusEvent<HTMLElement>) => void;
 }
-const AppDateRange :FC<AppDateRangeProps> = ({months})=>{
-    const [{ checkIn, checkOut }, dispatch] = useDataContext();
+const AppDateRange :FC<AppDateRangeProps> = ({
+  months,
+  onFocus,
+  onBlur
+}) => {
+   const [{ checkIn, checkOut }, dispatch] = useDataContext();
 
-  const selectionRange = {
-    startDate: checkIn,
-    endDate: checkOut,
+  let selectionRange = {
+    startDate: checkIn ? checkIn: new Date(),
+    endDate: checkOut ? checkOut: new Date(),
     key: 'selection',
   };
 
-  const handleDatePicker = (range) => {
+  const handleDatePicker = (range: any) => {
+    console.log('range: ', range);
     const { startDate, endDate } = range.selection;
     dispatch({ type: DATA_ACTION_TYPES.SET_CHECK_IN, payload: startDate });
     dispatch({ type: DATA_ACTION_TYPES.SET_CHECK_OUT, payload: endDate });
   };
+
   return (
-     <div className="md:py-4 rounded-3xl">
+     <div
+      className="mx-auto md:py-4 rounded-3xl"
+      onFocus={onFocus}
+      onBlur={onBlur}>
       <DateRange
         ranges={[selectionRange]}
         onChange={handleDatePicker}
-        months={months || 2}
+        months={2}
         direction="horizontal"
+        showPreview={true}
         showMonthAndYearPickers={false}
-        rangeColors={['#F7F7F7']}
-        minDate={new Date()}
         showDateDisplay={false}
-        monthDisplayFormat="MMMM YYY"
+        moveRangeOnFirstSelection={false}
       />
     </div>
   );

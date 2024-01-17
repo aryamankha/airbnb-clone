@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { formatRangeDate } from '../utils/datesutils';
 import AppHeaderOption from './AppHeaderOption';
 import AppSearchBar from './AppSearchBar';
+import { ContextProvider } from '../context/store';
 import {GlobeAltIcon,MenuIcon,SearchIcon,UserCircleIcon} from '@heroicons/react/outline';
 const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
   const [isSnapTop, setIsSnapTop] = useState<boolean>(searchPage ? false : true);
@@ -45,8 +46,8 @@ const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
   }, [searchPage]);
 
   return(
-  <>
-    <header  className={`${headerBehaviour()} z-50 fixed top-0 w-full pt-5 duratio-300 md:transition-none `}>
+  <ContextProvider>
+    <header className={`${headerBehaviour()} z-50 fixed top-0 w-full pt-5 duratio-300 md:transition-none `}>
         <div className={`${searchPage?'px-7':'container'} hidden md:grid-cols-[auto,1fr,auto] xl:grid-cols-[1.5fr,3fr,1.5fr] 2xl:grid-cols-[1fr,3fr,1fr] items-start`} >
             <div className="flex items-center h-12">
               <Link href="/">
@@ -104,7 +105,7 @@ const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
                 active={activeMenu === HeaderOptions.PLACES_TO_STAY}
                 onClick={() => setActiveMenu(HeaderOptions.PLACES_TO_STAY)}
               >
-                Places to stay
+                Stay
               </AppHeaderOption>
               <AppHeaderOption
                 isSnap={isSnapTop}
@@ -168,6 +169,6 @@ const AppHeader: FC<HeaderProps> = ({ exploreNearby, searchPage, query }) => {
           onClick={() => setIsActiveSearch(false)}
         />
       )}
-  </>);
+  </ContextProvider>);
 };
 export default AppHeader;
