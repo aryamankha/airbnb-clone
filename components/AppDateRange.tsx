@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, FocusEvent} from 'react'
 import {DateRange} from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -9,8 +9,14 @@ import { useDataContext } from './../hooks/useDataContext';
 
 interface AppDateRangeProps{
     months?:number,
+    onFocus: () => void;
+    onBlur: (event: FocusEvent<HTMLElement>) => void;
 }
-const AppDateRange :FC<AppDateRangeProps> = ({months})=>{
+const AppDateRange :FC<AppDateRangeProps> = ({
+  months,
+  onFocus,
+  onBlur
+}) => {
    const [{ checkIn, checkOut }, dispatch] = useDataContext();
 
   let selectionRange = {
@@ -27,7 +33,10 @@ const AppDateRange :FC<AppDateRangeProps> = ({months})=>{
   };
 
   return (
-     <div className="mx-auto md:py-4 rounded-3xl">
+     <div
+      className="mx-auto md:py-4 rounded-3xl"
+      onFocus={onFocus}
+      onBlur={onBlur}>
       <DateRange
         ranges={[selectionRange]}
         onChange={handleDatePicker}

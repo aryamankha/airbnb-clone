@@ -91,12 +91,12 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
 
   return (
     <>
-      <div className={`${isActiveHeader ? "visible" : "invisible"} px-4`}>
+      <div className={`${isActiveHeader ? "visible" : "invisible"} flex flex-col px-4`}>
         <div
           className={`${
             !isActiveHeader &&
             "translate-y-[-75px] transform scale-50 opacity-0 z-[100]"
-          } max-w-[850px] mx-auto mt-2 rounded-full bg-white border border-gray-200 duration-300 hidden md:flex`}
+          } w-1/2 mx-auto mt-2 rounded-full bg-white border border-gray-200 duration-300 hidden md:flex`}
         >
           <form
             id="searchForm"
@@ -105,7 +105,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
               menu === HeaderOptions.FIND_EXPERIENCES
                 ? "grid-cols-2"
                 : "grid-cols-[0.8fr,0.7fr,0.7fr,auto] lg:grid-cols-[1fr,0.7fr,0.7fr,auto]"
-            } grid flex-grow`}
+            } grid w-full`}
             onSubmit={handleOnSubmit}
           >
             {/* location */}
@@ -152,7 +152,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                   placeholder="Add dates"
                   active={searchMenu === ESearchMenu.CHECK_IN}
                   value={formatCheckDate(checkIn)}
-                  onFocus={() => setSearchMenu(ESearchMenu.CHECK_IN)}
+                  onFocus={() => searchMenu === ESearchMenu.CHECK_IN ? handleOnBlur : setSearchMenu(ESearchMenu.CHECK_IN)}
                   onBlur={handleOnBlur}
                   onClear={resetDate}
                 >
@@ -168,7 +168,7 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                   placeholder="Add dates"
                   active={searchMenu === ESearchMenu.CHECK_OUT}
                   value={formatCheckDate(checkOut)}
-                  onFocus={() => setSearchMenu(ESearchMenu.CHECK_OUT)}
+                  onFocus={() => searchMenu === ESearchMenu.CHECK_OUT ? handleOnBlur : setSearchMenu(ESearchMenu.CHECK_OUT)}
                   onBlur={handleOnBlur}
                   onClear={resetDate}
                 >
@@ -275,9 +275,6 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
                     </div>
                   </AppSearchOptionWrapper>
                 </AppSearchOptionButton>
-                <AppSearchOptionWrapper className={dateRangeStyle}>
-                    {(searchMenu === ESearchMenu.CHECK_IN || searchMenu === ESearchMenu.CHECK_OUT) && <AppDateRange />}
-                 </AppSearchOptionWrapper>
               </>
             ) : (
               <AppSearchOptionButton
@@ -293,12 +290,25 @@ const AppSearchBar: FC<IAppSearchBarProps> = ({
               >
                 {/* date picker */}
                 <AppSearchOptionWrapper className={dateRangeStyle}>
-                  {searchMenu === ESearchMenu.GUESTS && <AppDateRange />}
+                  {searchMenu === ESearchMenu.GUESTS && 
+                  <AppDateRange
+                    onFocus={() => {}}
+                    onBlur={handleOnBlur}
+                  />}
                 </AppSearchOptionWrapper>
               </AppSearchOptionButton>
             )}
           </form>
         </div>
+        <div className={dateRangeStyle}>
+            {(
+              searchMenu === ESearchMenu.CHECK_IN || searchMenu === ESearchMenu.CHECK_OUT) && 
+              <AppDateRange 
+                onFocus={() => {}}
+                onBlur={handleOnBlur} 
+              />
+            }
+          </div>
       </div>
     </>
   );
